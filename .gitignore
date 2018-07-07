@@ -1,1 +1,4 @@
 *.so
+*.out
+*.exe
+*.vscode
