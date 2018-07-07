@@ -34,8 +34,14 @@ std::string Templater::render()
 {
     std::string var_data;
     std::stringbuf normal_text;
-    
+
     while(!this->stream->eof()) {
+        if (this->stream->peek() == '{') {
+            var_data = this->getVarFromStream();
+            if (var_data.length())
+                normal_text.sputn(var_data.c_str(), var_data.length());
+        }
+
         //Get raw text till var start
         this->stream->get(normal_text, '{');
 
@@ -43,6 +49,8 @@ std::string Templater::render()
             var_data = this->getVarFromStream();
             if (var_data.length())
                 normal_text.sputn(var_data.c_str(), var_data.length());
+        } else if (this->stream->eof()) {
+            break;
         } else if (this->stream->fail()) {
             throw "Fail stream";
         }
