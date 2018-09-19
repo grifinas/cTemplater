@@ -17,7 +17,7 @@ class Templater {
         Templater(std::string);
         ~Templater();
         std::string render();
-        void set(std::string, std::string);
+        Templater *set(std::string, std::string);
         void clearData();
         bool hasKey(std::string) const;
         void streamFromFile(char const *file_name);

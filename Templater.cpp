@@ -89,9 +89,10 @@ std::string Templater::getVarFromStream()
     return this->datamap.at(string_var);
 }
 
-void Templater::set(std::string key, std::string val)
+Templater *Templater::set(std::string key, std::string val)
 {
     this->datamap[key] = val;
+    return this;
 }
 
 void Templater::clearData()
